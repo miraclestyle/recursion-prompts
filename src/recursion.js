@@ -66,25 +66,13 @@ var sumBelow = function(n) {
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
-  if (!Array.isArray(x)) {
-    if (x < y-1) {
-        return range([x+1], y-1);
-    } else if (x-1 > y) {
-        return range([x-1], y+1);
-    } else {
-        return [];
-    }
-    return range([start], end);
-  }
-  var last = x[x.length-1];
-  if (last < y) {
-      x.push(last+1);
-  } else if (last > y) {
-      x.push(last-1);
+  if (x < y-1) {
+    return [x+1].concat(range(x+1, y));
+  } else if (x > y+1) {
+    return [x-1].concat(range(x-1, y));
   } else {
-      return x;
+    return [];
   }
-  return range(x, y);
 };
 
 // 7. Compute the exponent of a number.
@@ -119,6 +107,15 @@ var reverse = function(string) {
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
+  var st = string.toLowerCase();
+  var len = st.length;
+  if (len < 2) {
+    return true;
+  }
+  if (st[0] !== st[len-1]) {
+    return false;
+  }
+  return palindrome(st.substring(1, len-1));
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -127,6 +124,13 @@ var palindrome = function(string) {
 // modulo(17,5) // 2
 // modulo(22,6) // 4
 var modulo = function(x, y) {
+  if ((x < 0 && y > 0) || (x > 0 && y < 0)) {
+    y = -y;
+  }
+  if (x === 0 || (x > 0 && x < y) || (x < 0 && x > y)) {
+    return x;
+  }
+  return modulo(x-y, y);
 };
 
 // 12. Write a function that multiplies two numbers without using the * operator or
