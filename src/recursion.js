@@ -103,6 +103,12 @@ var powerOfTwo = function(n) {
 
 // 9. Write a function that reverses a string.
 var reverse = function(string) {
+  var len = string.length;
+  if (len > 1) {
+    return string[len-1].concat(reverse(string.substring(0, len-1)));
+  } else {
+    return string;
+  }
 };
 
 // 10. Write a function that determines if a string is a palindrome.
