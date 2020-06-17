@@ -73,7 +73,6 @@ var range = function(x, y) {
   } else {
     return [];
   }
-
 };
 
 // 7. Compute the exponent of a number.
